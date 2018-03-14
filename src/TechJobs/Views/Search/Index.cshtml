@@ -1,17 +1,17 @@
 ﻿<h1>@ViewBag.title</h1>
-
 <form action="/Search/Results">
     <h2>Search by:</h2>
 
     <p>
+
         @foreach (KeyValuePair<string, string> column in ViewBag.columns)
         {
             <span>
                 <input type="radio"
                        name="searchType"
                        id="@column.Key"
-                       value="@column.Key" 
-                       checked="@column.Key == 'all''"/>
+                       value="@column.Key"
+                       checked="@column.Key == 'all''" />
                 <label for="@column.Key">@column.Value</label>
             </span>
         }
@@ -29,8 +29,17 @@
 
 @if (ViewBag.jobs != null)
 {
-
     <h3>@ViewBag.jobs.Count Result(s)</h3>
-
-    // TODO #2 - Loop over jobs dictionary and display all job fields 
+    @foreach (Dictionary<string, string> jobs in ViewBag.jobs)
+    { 
+        <table class="job-listing">  
+            @foreach (KeyValuePair<string, string> job in jobs)
+            {
+                <tr>
+                    <td>@job.Key</td>
+                    <td>@job.Value</td>
+                </tr>
+            }
+        </table>
+    }
 }
